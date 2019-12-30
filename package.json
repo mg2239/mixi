@@ -1,0 +1,29 @@
+{
+  "name": "spotify-mix-helper",
+  "version": "1.0.0",
+  "description": "Organizes Spotify tracks by key and BPM to make mixing easier.",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mg2239/spotify-mix-helper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mg2239/spotify-mix-helper/issues"
+  },
+  "homepage": "https://github.com/mg2239/spotify-mix-helper#readme"
+}
