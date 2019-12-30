@@ -14,7 +14,11 @@ const stateKey = 'spotify_auth_state';
 
 const app = express();
 
-app.use(cors()).use(cookieParser());
+let access;
+let refresh;
+
+app.use(cors());
+app.use(cookieParser());
 
 /**
  * Generates a random string containing numbers and letters
@@ -80,9 +84,9 @@ app.get('/callback', function (req, res) {
         // request.get(options, function (error, response, body) {
         //   console.log(body);
         // });
-        res.redirect('playlist-select.html?' + querystring.stringify({
-          access_token, refresh_token
-        }));
+        access = access_token;
+        refresh = refresh_token;
+        res.redirect('http://localhost:3000');
       }
       else {
         res.redirect('error.html')
@@ -90,6 +94,12 @@ app.get('/callback', function (req, res) {
     });
   }
 });
+
+app.get('/token', (req, res) => {
+  console.log(access);
+  console.log(refresh);
+  res.send({ access, refresh });
+})
 
 console.log(`Listening on port ${port}`);
 app.listen(port);

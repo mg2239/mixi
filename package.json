@@ -4,7 +4,7 @@
     "description": "Organizes Spotify tracks by key and BPM to make mixing easier.",
     "main": "index.js",
     "scripts": {
-        "start": "concurrently \"cd server && npm start\" \"cd client/src && npm start\"",
+        "start": "concurrently \"cd server && nodemon app.js\" \"cd client/src && npm start\"",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
