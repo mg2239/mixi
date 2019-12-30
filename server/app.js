@@ -5,17 +5,16 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const querystring = require('querystring');
 
+const port = 5000;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = 'http://localhost:8888/callback';
+const redirect_uri = `http://localhost:${port}/callback`;
 
 const stateKey = 'spotify_auth_state';
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'))
-  .use(cors())
-  .use(cookieParser());
+app.use(cors()).use(cookieParser());
 
 /**
  * Generates a random string containing numbers and letters
@@ -92,5 +91,5 @@ app.get('/callback', function (req, res) {
   }
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+console.log(`Listening on port ${port}`);
+app.listen(port);
