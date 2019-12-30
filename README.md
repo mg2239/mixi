@@ -1,2 +1,2 @@
-# spotify-mix-helper
+# sortify
 Organizes Spotify tracks by key and BPM to make mixing easier.
