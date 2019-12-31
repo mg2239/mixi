@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/normalize.css';
 import './css/skeleton.css';
-import LoginView from './LoginView';
+import Login from './Login';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<LoginView />, document.getElementById('container'));
+ReactDOM.render(<Login />, document.getElementById('container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

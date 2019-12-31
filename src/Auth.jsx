@@ -1,19 +1,16 @@
 import React from 'react';
 
-class AuthView extends React.Component {
-  constructor() {
+class Auth extends React.Component {
+  constructor(props) {
     super();
     this.state = {
       playlist: null,
-      access: null
+      access: props.access,
+      isSubmitted: false,
+      isGenerated: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    const { access } = this.props.match.params;
-    this.setState({ access });
   }
 
   handleChange(event) {
@@ -21,12 +18,13 @@ class AuthView extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(`${this.state.playlist} + ${this.state.access}`)
+    event.preventDefault();
+    alert(`${this.state.access} + ${this.state.playlist}`)
   }
 
   render() {
     return <>
-      <h5>Paste a link to any Spotify playlist below!</h5>
+      <h5>Paste a link to a Spotify playlist below!</h5>
       <form onSubmit={this.handleSubmit}>
         <label>
           <input style={{ width: "40%", "font-weight": "400" }} type="text" onChange={this.handleChange} />
@@ -37,4 +35,4 @@ class AuthView extends React.Component {
   }
 }
 
-export default AuthView;
+export default Auth;

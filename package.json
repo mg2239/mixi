@@ -1,24 +1,35 @@
 {
-    "name": "spotify-mix-helper",
-    "version": "1.0.0",
-    "description": "Organizes Spotify tracks by key and BPM to make mixing easier.",
-    "main": "index.js",
-    "scripts": {
-        "start": "concurrently \"cd server && nodemon app.js\" \"cd client/src && npm start\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/mg2239/spotify-mix-helper.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/mg2239/spotify-mix-helper/issues"
-    },
-    "homepage": "https://github.com/mg2239/spotify-mix-helper#readme",
+    "name": "sortify",
+    "version": "0.1.0",
+    "private": true,
     "dependencies": {
-        "concurrently": "^5.0.2"
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.3.0"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }
