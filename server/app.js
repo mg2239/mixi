@@ -14,9 +14,6 @@ const stateKey = 'spotify_auth_state';
 
 const app = express();
 
-let access;
-let refresh;
-
 app.use(cors());
 app.use(cookieParser());
 
@@ -76,17 +73,7 @@ app.get('/callback', function (req, res) {
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         let { access_token, refresh_token } = body;
-        // let options = {
-        //   url: 'https://api.spotify.com/v1/me',
-        //   headers: { 'Authorization': 'Bearer ' + access_token },
-        //   json: true
-        // };
-        // request.get(options, function (error, response, body) {
-        //   console.log(body);
-        // });
-        access = access_token;
-        refresh = refresh_token;
-        res.redirect('http://localhost:3000');
+        res.redirect('http://localhost:3000/' + access_token);
       }
       else {
         res.redirect('error.html')
@@ -94,12 +81,6 @@ app.get('/callback', function (req, res) {
     });
   }
 });
-
-app.get('/token', (req, res) => {
-  console.log(access);
-  console.log(refresh);
-  res.send({ access, refresh });
-})
 
 console.log(`Listening on port ${port}`);
 app.listen(port);
