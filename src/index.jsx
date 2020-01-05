@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/normalize.css';
 import './css/skeleton.css';
+import './css/track.css';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
 

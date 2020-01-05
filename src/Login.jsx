@@ -1,8 +1,7 @@
 import React from 'react';
 import Auth from './Auth';
 
-export const authEndpoint = 'https://accounts.spotify.com/authorize';
-
+const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = "http://localhost:3000";
 const scope = "user-read-email";
@@ -44,13 +43,13 @@ class Login extends React.Component {
           <a href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token&show_dialog=true`}>
             <button class="button-primary">Log in with Spotify</button>
           </a>
+          <p>built by <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a> on github</p>
         </>}
         {this.state.token && (
           <Auth access={this.state.token} />
         )}
-        <p>built by <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a> on github</p>
       </div>
-    );
+    )
   }
 }
 
