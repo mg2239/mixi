@@ -42,11 +42,12 @@ class Auth extends React.Component {
   render() {
     return <>
       {!this.state.isSubmitted && <>
-        <h5>Copy and paste a Spotify playlist's URI below!</h5>
-        <p>Check <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a> if you don't know how to find a playlist's URI</p>
+        <h5>Enter a Spotify playlist URI below!</h5>
+        <p>Check <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a> if you don't know how to find a playlist's URI.</p>
+        <p>Note: Only the first 100 tracks of your playlist are organized.</p>
         <form onSubmit={this.handleSubmit}>
           <label>
-            <input style={{ width: "40%", "font-weight": "400" }} type="text" onChange={this.handleChange} />
+            <input style={{ width: "40%", fontWeight: 400 }} type="text" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
           {this.warning()}
