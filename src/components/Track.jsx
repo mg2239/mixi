@@ -27,7 +27,7 @@ class Track extends React.Component {
         <div style={{ height: "100%", width: "100%" }}>
           <div className="row">
             <div className="nine columns">
-              <a href={this.state.link} className="track-title">{this.state.title}</a>
+              <a href={this.state.link} className="track-title" target="_blank" rel="noopener noreferrer">{this.state.title}</a>
               <p className="track-artist">{this.state.artist}</p>
             </div>
             <div className="three columns">

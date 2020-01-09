@@ -21,7 +21,7 @@ class TrackDisplay extends React.Component {
   componentDidMount() {
     fetch(`https://api.spotify.com/v1/playlists/${this.state.playlistId}/tracks?`
       + querystring.stringify({
-        fields: 'items(track(artists,album.images,name,id))',
+        fields: 'items(track(artists,album.images,name,id,external_urls))',
         limit: 100,
         offset: 0,
         market: 'US'
@@ -45,10 +45,11 @@ class TrackDisplay extends React.Component {
     let { items } = json;
     items.forEach((i) => {
       let { track } = i;
-      let { album, artists, id, name } = track;
+      let { album, artists, id, name, external_urls } = track;
       let image = album.images[1].url
       let artist = artists[0].name
-      this.trackInfo[id] = { artist, name, image }
+      let link = external_urls.spotify;
+      this.trackInfo[id] = { artist, name, image, link }
     })
   }
 
@@ -85,7 +86,7 @@ class TrackDisplay extends React.Component {
           key={id}
           title={this.trackInfo[id]['name']}
           artist={this.trackInfo[id]['artist']}
-          link="#"
+          link={this.trackInfo[id]['link']}
           scale={this.trackInfo[id]['key']}
           mode={this.trackInfo[id]['mode']}
           bpm={this.trackInfo[id]['bpm']}

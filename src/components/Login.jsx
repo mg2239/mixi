@@ -45,10 +45,12 @@ class Login extends React.Component {
   render() {
     return (
       <div style={{ textAlign: "center", paddingTop: "4rem" }}>
-        <img src={logo} alt="mixi logo" style={{ width: "150px" }}></img>
+        <a href="/">
+          <img src={logo} alt="mixi logo" style={{ width: "150px" }}></img>
+        </a>
         <h1 style={{ fontWeight: "bold" }}>Mixi</h1>
         {!this.state.token && <>
-          <h5>Organize tracks in your Spotify playlists by key and BPM.</h5>
+          <h5>Make mixes faster by sorting your Spotify playlist tracks by key and BPM!</h5>
           <a href={spotifyAuth}>
             <button className="button-primary">Access with Spotify</button>
           </a>
