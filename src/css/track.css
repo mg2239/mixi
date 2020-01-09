@@ -1,5 +1,33 @@
 .track {
-  height: 100px;
-  width: 300px;
-  background-color: aliceblue;
+  display: flex;
+  height: 60px;
+  background-color: rgb(245, 245, 245);
+  text-align: left;
+  align-items: center;
+  padding: 10px;
+}
+
+.track-img {
+  height: 100%;
+  padding-right: 10px;
+}
+
+.track-title {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.track-artist {
+  font-size: 1.2rem;
+}
+
+.track-key {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.track-bpm {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }

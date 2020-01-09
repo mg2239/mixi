@@ -1,5 +1,6 @@
 import React from 'react';
 import Auth from './Auth';
+import logo from '../img/mixi-logo.png';
 
 const spotifyAuth = 'https://accounts.spotify.com/authorize';
 const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -37,11 +38,12 @@ class Login extends React.Component {
   render() {
     return (
       <div style={{ textAlign: "center", paddingTop: "4rem" }}>
-        <h1>Mixi</h1>
+        <img src={logo} alt="mixi logo" style={{ width: "150px" }}></img>
+        <h1 style={{ fontWeight: "bold" }}>Mixi</h1>
         {!this.state.token && <>
-          <h5>Organize tracks in your Spotify playlists by key and BPM!</h5>
+          <h5>Organize tracks in your Spotify playlists by key and BPM.</h5>
           <a href={`${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token&show_dialog=true`}>
-            <button className="button-primary">Log in with Spotify</button>
+            <button className="button-primary">Access with Spotify</button>
           </a>
           <p>built by <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a> on github</p>
         </>}

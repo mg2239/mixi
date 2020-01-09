@@ -2,16 +2,23 @@ import React from 'react';
 import Track from './Track';
 import querystring from 'query-string';
 
-let allTracks = <Track title="test" artist="me" link="#" key="A" bpm="130" />
+let allTracks =
+  <Track
+    title="Interdimensional Portal Leading to a Cute Place (with Snail's House)"
+    artist="In Love With a Ghost"
+    link="#"
+    scale="A"
+    bpm="130"
+    img="https://imgur.com/1SXLDJx.jpg" />
 
 class TrackDisplay extends React.Component {
   constructor(props) {
     super();
     let { access, playlist } = props;
-    let playlistId = playlist.substring(17);
+    // let playlistId = playlist.substring(17);
     this.state = {
       access,
-      playlistId,
+      // playlistId,
       isGenerated: true,
       bpmKey: 0
     }

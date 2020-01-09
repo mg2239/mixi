@@ -8,7 +8,7 @@ class Auth extends React.Component {
     this.state = {
       playlist: null,
       access: access,
-      isSubmitted: false,
+      isSubmitted: true,
       invalid: false
     }
     this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,6 @@ class Auth extends React.Component {
       {!this.state.isSubmitted && <>
         <h5>Enter a Spotify playlist URI below!</h5>
         <p>Check <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a> if you don't know how to find a playlist's URI.</p>
-        <p>Note: Only the first 100 tracks of your playlist are organized.</p>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input style={{ width: "40%", fontWeight: 400 }} type="text" onChange={this.handleChange} />
