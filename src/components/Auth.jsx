@@ -1,5 +1,9 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import TrackDisplay from './TrackDisplay';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 class Auth extends React.Component {
   constructor(props) {
@@ -16,7 +20,7 @@ class Auth extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ playlist: event.target.value });
+    this.setState({ invalid: false, playlist: event.target.value });
   }
 
   handleSubmit(event) {
@@ -32,7 +36,15 @@ class Auth extends React.Component {
 
   warning() {
     if (this.state.invalid) {
-      return <p style={{ color: 'red' }}>Invalid URI!</p>;
+      return toast.error("Invalid URI!", {
+        toastId: "",
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     }
     else {
       return null;
@@ -46,10 +58,11 @@ class Auth extends React.Component {
         <p>Check <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a> if you don't know how to find a playlist's URI.</p>
         <form onSubmit={this.handleSubmit}>
           <label>
-            <input style={{ width: "40%", fontWeight: 400 }} type="text" onChange={this.handleChange} />
+            <input style={{ width: "60%", fontWeight: 400 }} type="text" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
           {this.warning()}
+          <ToastContainer />
         </form>
       </>}
       {this.state.isSubmitted && <>

@@ -1,10 +1,11 @@
 .track {
   display: flex;
-  height: 60px;
+  height: 6rem;
   background-color: rgb(245, 245, 245);
   text-align: left;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
+  margin: 0.2rem;
 }
 
 .track-img {
