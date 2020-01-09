@@ -2,8 +2,6 @@ import React from 'react';
 import Track from './Track';
 import querystring from 'query-string';
 
-let allTracks = []
-
 class TrackDisplay extends React.Component {
   constructor(props) {
     super();
@@ -17,6 +15,7 @@ class TrackDisplay extends React.Component {
     }
     this.trackInfo = {};
     this.trackIds = [];
+    this.allTracks = [];
   }
 
   componentDidMount() {
@@ -36,21 +35,7 @@ class TrackDisplay extends React.Component {
       .then((res) => res.json())
       .then((json) => this.fillMetadata(json))
       .then(() => this.fillInfo())
-      .then(() => {
-        this.trackIds.forEach((id) => {
-          allTracks.push(
-            <Track
-              key={id}
-              title={this.trackInfo[id]['name']}
-              artist={this.trackInfo[id]['artist']}
-              link="#"
-              scale={this.trackInfo[id]['key']}
-              mode={this.trackInfo[id]['mode']}
-              bpm={this.trackInfo[id]['bpm']}
-              img={this.trackInfo[id]['image']} />
-          )
-        })
-      })
+      .then(() => this.createTracks())
       .then(() => this.setState({ isGenerated: true }))
       .catch((err) => console.log(err))
   }
@@ -93,10 +78,26 @@ class TrackDisplay extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  createTracks() {
+    this.trackIds.forEach((id) => {
+      this.allTracks.push(
+        <Track
+          key={id}
+          title={this.trackInfo[id]['name']}
+          artist={this.trackInfo[id]['artist']}
+          link="#"
+          scale={this.trackInfo[id]['key']}
+          mode={this.trackInfo[id]['mode']}
+          bpm={this.trackInfo[id]['bpm']}
+          img={this.trackInfo[id]['image']} />
+      )
+    })
+  }
+
   render() {
     return <>
       {!this.state.isGenerated && <h5>Processing...</h5>}
-      {this.state.isGenerated && allTracks}
+      {this.state.isGenerated && this.allTracks}
     </>
   }
 }
