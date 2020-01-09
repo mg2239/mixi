@@ -1,7 +1,7 @@
 # Mixi
 
 <p align="center">
-    <img src="https://imgur.com/oeknNsh.jpg" width="300">
+    <img src="https://imgur.com/1SXLDJx.jpg" width="300">
 </p>
 
 Have you ever wanted to create a mix of your favorite songs, but finding info for each song was a hassle? 
