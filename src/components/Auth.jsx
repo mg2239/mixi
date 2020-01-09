@@ -8,7 +8,7 @@ class Auth extends React.Component {
     this.state = {
       playlist: null,
       access: access,
-      isSubmitted: true,
+      isSubmitted: false,
       invalid: false
     }
     this.handleChange = this.handleChange.bind(this);
