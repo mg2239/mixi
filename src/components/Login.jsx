@@ -5,6 +5,7 @@ import logo from '../img/mixi-logo.png';
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = "http://localhost:3000";
+const prod = "https://mixiforspotify.web.app/";
 const spotifyAuth =
   'https://accounts.spotify.com/authorize?'
   + querystring.stringify({
@@ -45,10 +46,12 @@ class Login extends React.Component {
   render() {
     return (
       <div style={{ textAlign: "center", paddingTop: "4rem" }}>
-        <a href="/">
+        <div style={{ width: "150px", margin: "auto" }}>
           <img src={logo} alt="mixi logo" style={{ width: "150px" }}></img>
-        </a>
-        <h1 style={{ fontWeight: "bold" }}>Mixi</h1>
+          <a href="/" style={{ textDecoration: "none" }}>
+            <h1 style={{ fontWeight: "bold", color: "black" }}>Mixi</h1>
+          </a>
+        </div>
         {!this.state.token && <>
           <h5>Make mixes faster by sorting your Spotify playlist tracks by key and BPM!</h5>
           <a href={spotifyAuth}>

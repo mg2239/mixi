@@ -13,31 +13,44 @@ class Auth extends React.Component {
       playlist: null,
       access: access,
       isSubmitted: false,
-      invalid: false
+      invalidURI: false,
+      playlistDNE: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ invalid: false, playlist: event.target.value });
+    this.setState({ invalidURI: false, playlistDNE: false, playlist: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    let reg = new RegExp('spotify:playlist:.*');
+    toast.dismiss();
+    let reg = new RegExp('^spotify:playlist:.*');
     if (this.state.playlist && this.state.playlist.match(reg)) {
       this.setState({ isSubmitted: true });
     }
     else {
-      this.setState({ invalid: true });
+      this.setState({ invalidURI: true });
     }
   }
 
   warning() {
-    if (this.state.invalid) {
+    if (this.state.invalidURI) {
       return toast.error("Invalid URI!", {
-        toastId: "",
+        toastId: 1,
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
+    }
+    else if (this.state.playlistDNE) {
+      return toast.error("Playlist does not exist!", {
+        toastId: 2,
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,
@@ -66,7 +79,7 @@ class Auth extends React.Component {
         </form>
       </>}
       {this.state.isSubmitted && <>
-        <TrackDisplay access={this.state.access} playlist={this.state.playlist} />
+        <TrackDisplay access={this.state.access} playlist={this.state.playlist} setState={(p) => this.setState(p)} />
       </>}
     </>
   }
