@@ -4,66 +4,75 @@ import Auth from './Auth';
 import logo from '../img/mixi-logo.png';
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = "http://localhost:3000";
-const prod = "https://mixiforspotify.web.app/";
-const spotifyAuth =
-  'https://accounts.spotify.com/authorize?'
-  + querystring.stringify({
+const redirectUri = 'http://localhost:3000';
+// eslint-disable-next-line no-unused-vars
+const prod = 'https://mixiforspotify.web.app/';
+const spotifyAuth = `https://accounts.spotify.com/authorize?${
+  querystring.stringify({
     client_id: clientId,
     redirect_uri: redirectUri,
     response_type: 'token',
-    show_dialog: true
-  });
+    show_dialog: true,
+  })}`;
 
 const hash = window.location.hash
   .substring(1)
-  .split("&")
-  .reduce(function (initial, item) {
+  .split('&')
+  .reduce((initial, item) => {
     if (item) {
-      var parts = item.split("=");
+      const parts = item.split('=');
+      // eslint-disable-next-line no-param-reassign
       initial[parts[0]] = decodeURIComponent(parts[1]);
     }
     return initial;
   }, {});
 
-window.location.hash = "";
+window.location.hash = '';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      token: null
-    }
+      token: null,
+    };
   }
 
   componentDidMount() {
-    let token = hash.access_token;
+    const token = hash.access_token;
     if (token) {
       this.setState({ token });
     }
   }
 
   render() {
+    const { token } = this.state;
     return (
-      <div style={{ textAlign: "center", paddingTop: "4rem" }}>
-        <div style={{ width: "150px", margin: "auto" }}>
-          <img src={logo} alt="mixi logo" style={{ width: "150px" }}></img>
-          <a href="/" style={{ textDecoration: "none" }}>
-            <h1 style={{ fontWeight: "bold", color: "black" }}>Mixi</h1>
+      <div style={{ textAlign: 'center', paddingTop: '4rem' }}>
+        <div style={{ width: '150px', margin: 'auto' }}>
+          <img src={logo} alt="mixi logo" style={{ width: '150px' }} />
+          <a href="/" style={{ textDecoration: 'none' }}>
+            <h1 style={{ fontWeight: 'bold', color: 'black' }}>Mixi</h1>
           </a>
         </div>
-        {!this.state.token && <>
-          <h5>Make mixes faster by sorting your Spotify playlist tracks by key and BPM!</h5>
-          <a href={spotifyAuth}>
-            <button className="button-primary">Access with Spotify</button>
-          </a>
-          <p>built by <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a> on github</p>
-        </>}
-        {this.state.token && (
-          <Auth access={this.state.token} />
+        {!token && (
+          <>
+            <h5>Make mixes faster by sorting your Spotify playlist tracks by key and BPM!</h5>
+            <a href={spotifyAuth}>
+              <button className="button-primary" type="button">Access with Spotify</button>
+            </a>
+            <p>
+              built by
+              <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a>
+              {' '}
+              on github
+            </p>
+          </>
+        )}
+        {token && (
+          <Auth access={token} />
         )}
       </div>
-    )
+    );
   }
 }
 
