@@ -109,7 +109,7 @@ class TrackDisplay extends React.Component {
     const { isGenerated } = this.state;
     return (
       <>
-        {isGenerated && (
+        {!isGenerated && (
           <>
             <h5>Processing playlist...</h5>
             <div className="loader" />
