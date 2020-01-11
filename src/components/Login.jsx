@@ -3,7 +3,7 @@ import querystring from 'query-string';
 import Auth from './Auth';
 import logo from '../img/mixi-logo.png';
 
-const isProd = true;
+const isProd = false;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = isProd ? 'https://mixiforspotify.web.app/' : 'http://localhost:3000';
 const spotifyAuth = `https://accounts.spotify.com/authorize?${
