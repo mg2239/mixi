@@ -62,6 +62,7 @@ class Login extends React.Component {
             </a>
             <p>
               built by
+              {' '}
               <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a>
               {' '}
               on github

@@ -73,7 +73,9 @@ class Auth extends React.Component {
             <h5>Enter a Spotify playlist URI below!</h5>
             <p>
               Check
+              {' '}
               <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a>
+              {' '}
               if you don&apos;t know how to find a playlist&apos;s URI.
             </p>
             <form onSubmit={this.handleSubmit}>
