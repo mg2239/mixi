@@ -66,7 +66,6 @@ class Auth extends React.Component {
               {' '}
               if you don&apos;t know how to find a playlist&apos;s URI.
             </p>
-            <p>spotify:playlist:5IKnmrC7kpOxgs4nJepT0E</p>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="playlist">
                 <input id="playlist" style={{ width: '60%', fontWeight: 400 }} type="text" onChange={this.handleChange} />

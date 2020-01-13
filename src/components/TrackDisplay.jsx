@@ -19,7 +19,6 @@ class TrackDisplay extends React.Component {
     this.setParentState = setState;
     this.trackInfo = {};
     this.trackIds = [];
-    this.allTracks = [];
   }
 
   componentDidMount() {
@@ -50,7 +49,6 @@ class TrackDisplay extends React.Component {
   }
 
   componentDidUpdate() {
-    this.allTracks = [];
     this.createTracks();
   }
 
@@ -101,6 +99,7 @@ class TrackDisplay extends React.Component {
   }
 
   createTracks() {
+    this.allTracks = [];
     this.sortTracks();
     this.trackIds.forEach((id) => {
       this.allTracks.push(
