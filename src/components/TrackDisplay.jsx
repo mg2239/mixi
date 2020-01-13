@@ -136,11 +136,10 @@ class TrackDisplay extends React.Component {
     }
   }
 
-  changeSort(sort) {
-    // sort is the boolean to which bpmKey should be set to
+  changeSort(newBpmKey) {
     const { bpmKey } = this.state;
-    if (bpmKey !== sort) {
-      this.setState({ isGenerated: false, bpmKey: sort });
+    if (bpmKey !== newBpmKey) {
+      this.setState({ isGenerated: false, bpmKey: newBpmKey });
     }
   }
 
