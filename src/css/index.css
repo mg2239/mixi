@@ -35,17 +35,37 @@ body {
   padding: 0 20px;
 }
 
+#track-grid-header {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgb(216, 216, 216);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#track-grid-title {
+  margin: 0;
+}
+
+#track-grid-key {
+  margin: 0;
+}
+
+#track-grid-bpm {
+  margin: 0;
+}
+
 .track {
   display: flex;
-  height: 6rem;
-  background-color: rgb(245, 245, 245);
+  height: 70px;
   text-align: left;
   align-items: center;
   padding: 1rem;
-  margin: 0.2rem;
+  border-bottom: 1px solid rgb(216, 216, 216);
 }
 
 .track-img {
+  width: 70px;
   height: 100%;
   padding-right: 10px;
 }
@@ -54,16 +74,20 @@ body {
   font-weight: bold;
   text-decoration: none;
   font-size: 1.6rem;
+  margin: 0;
 }
 
 .track-artist {
   font-size: 1.3rem;
+  margin: 0;
 }
 
 .track-key {
   font-size: 1.6rem;
+  margin: 0;
 }
 
 .track-bpm {
   font-size: 1.6rem;
+  margin: 0;
 }

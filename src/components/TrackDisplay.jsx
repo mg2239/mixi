@@ -163,6 +163,23 @@ class TrackDisplay extends React.Component {
                 Sort by BPM
               </button>
             </div>
+            <div id="track-grid-header">
+              <div style={{ height: '100%', width: '100%' }}>
+                <div className="row">
+                  <div className="nine columns">
+                    <p id="track-grid-title">Track</p>
+                  </div>
+                  <div className="three columns">
+                    <div className="one-half column">
+                      <p id="track-grid-key">Key</p>
+                    </div>
+                    <div className="one-half column">
+                      <p id="track-grid-bpm">BPM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {this.allTracks}
           </>
         )}

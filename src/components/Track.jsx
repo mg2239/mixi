@@ -29,12 +29,14 @@ class Track extends React.Component {
     } = this.state;
     return (
       <div className="track">
-        <img src={img} className="track-img" alt="" />
         <div style={{ height: '100%', width: '100%' }}>
           <div className="row">
-            <div className="nine columns">
-              <a href={link} className="track-title" target="_blank" rel="noopener noreferrer">{title}</a>
-              <p className="track-artist">{artists}</p>
+            <div className="nine columns" style={{ display: 'inline-flex' }}>
+              <img src={img} className="track-img" alt="" />
+              <div>
+                <a href={link} className="track-title" target="_blank" rel="noopener noreferrer">{title}</a>
+                <p className="track-artist">{artists}</p>
+              </div>
             </div>
             <div className="three columns">
               <div className="one-half column">
