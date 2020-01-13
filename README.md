@@ -18,6 +18,8 @@ With Mixi, your songs can now be categorized either by BPM or key, allowing you 
  
  - Get all playlist tracks
  
+ - Let users select from own playlist list
+ 
  - Search bar
  
  - Filtering tracks
@@ -25,3 +27,7 @@ With Mixi, your songs can now be categorized either by BPM or key, allowing you 
  - Organize tracks into groups (BPM ranges and grouping relative major/minor together)
  
  - Improved UI (color coding groups, better font, better sort button layout, etc.)
+
+## Screenshots
+![](https://imgur.com/um6s09h.jpg)
+![](https://imgur.com/WdqjTuH.jpg)
