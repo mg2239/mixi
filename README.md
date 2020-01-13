@@ -13,7 +13,7 @@ With Mixi, your songs can now be categorized either by BPM or key, allowing you 
  
  - Sorts tracks by either ascending BPM and key
  
- ## TODO/Possible features:
+## TODO/Potential features:
  - Sort alphabetically
  
  - Get all playlist tracks
