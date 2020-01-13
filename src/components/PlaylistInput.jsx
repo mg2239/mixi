@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure();
 
-class Auth extends React.Component {
+class PlaylistInput extends React.Component {
   constructor(props) {
     super();
     const { access } = props;
@@ -86,8 +86,8 @@ class Auth extends React.Component {
   }
 }
 
-Auth.propTypes = {
+PlaylistInput.propTypes = {
   access: PropTypes.string.isRequired,
 };
 
-export default Auth;
+export default PlaylistInput;

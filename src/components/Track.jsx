@@ -36,11 +36,13 @@ class Track extends React.Component {
               <a href={link} className="track-title" target="_blank" rel="noopener noreferrer">{title}</a>
               <p className="track-artist">{artists}</p>
             </div>
-            <div className="one column">
-              <p className="track-keybpm">{scale}</p>
-            </div>
-            <div className="one column">
-              <p className="track-keybpm">{bpm}</p>
+            <div className="three columns">
+              <div className="one-half column">
+                <p className="track-key">{scale}</p>
+              </div>
+              <div className="one-half column">
+                <p className="track-bpm">{bpm}</p>
+              </div>
             </div>
           </div>
         </div>

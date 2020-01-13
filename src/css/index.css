@@ -53,19 +53,17 @@ body {
 .track-title {
   font-weight: bold;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .track-artist {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .track-key {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
 }
 
 .track-bpm {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
 }

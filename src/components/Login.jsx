@@ -1,6 +1,6 @@
 import React from 'react';
 import querystring from 'query-string';
-import Auth from './Auth';
+import PlaylistInput from './PlaylistInput';
 import logo from '../img/mixi-logo.png';
 
 const isProd = false;
@@ -69,7 +69,7 @@ class Login extends React.Component {
           </>
         )}
         {token && (
-          <Auth access={token} />
+          <PlaylistInput access={token} />
         )}
       </div>
     );
