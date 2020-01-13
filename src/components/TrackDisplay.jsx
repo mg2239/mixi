@@ -43,13 +43,11 @@ class TrackDisplay extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const { bpmKey, isGenerated } = this.state;
-    return nextState.isGenerated !== isGenerated || nextState.bpmKey !== bpmKey;
-  }
-
   componentDidUpdate() {
-    this.createTracks();
+    const { isGenerated } = this.state;
+    if (!isGenerated) {
+      this.createTracks();
+    }
   }
 
   fillMetadata(json) {
