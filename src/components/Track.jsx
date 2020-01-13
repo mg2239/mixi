@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function convertKey(scale, mode) {
-  const numToKeyMaj = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-  const numToKeyMin = ['Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm'];
+  const numToKeyMaj = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+  const numToKeyMin = ['Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'Bbm', 'Bm'];
   if (mode) {
     return numToKeyMin[scale];
   }
@@ -14,19 +14,18 @@ class Track extends React.Component {
   constructor(props) {
     super();
     const {
-      title, artist, link, mode, img,
+      title, artists, link, mode, img, bpm,
     } = props;
-    let { scale, bpm } = props;
+    let { scale } = props;
     scale = convertKey(scale, mode);
-    bpm = Math.trunc(bpm + 0.5);
     this.state = {
-      title, artist, link, scale, bpm, img,
+      title, artists, link, scale, bpm, img,
     };
   }
 
   render() {
     const {
-      img, link, artist, title, scale, bpm,
+      img, link, artists, title, scale, bpm,
     } = this.state;
     return (
       <div className="track">
@@ -35,10 +34,13 @@ class Track extends React.Component {
           <div className="row">
             <div className="nine columns">
               <a href={link} className="track-title" target="_blank" rel="noopener noreferrer">{title}</a>
-              <p className="track-artist">{artist}</p>
+              <p className="track-artist">{artists}</p>
             </div>
-            <div className="three columns">
-              <p className="track-keybpm">{`${scale} / ${bpm}`}</p>
+            <div className="one column">
+              <p className="track-keybpm">{scale}</p>
+            </div>
+            <div className="one column">
+              <p className="track-keybpm">{bpm}</p>
             </div>
           </div>
         </div>
@@ -49,7 +51,7 @@ class Track extends React.Component {
 
 Track.propTypes = {
   title: PropTypes.string.isRequired,
-  artist: PropTypes.string.isRequired,
+  artists: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   scale: PropTypes.number.isRequired,
   mode: PropTypes.number.isRequired,

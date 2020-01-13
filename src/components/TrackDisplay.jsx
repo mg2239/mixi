@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,6 +14,7 @@ class TrackDisplay extends React.Component {
       access,
       playlistId,
       isGenerated: false,
+      bpmKey: false, // false if sorting by bpm, true if sorting by key
     };
     this.setParentState = setState;
     this.trackInfo = {};
@@ -39,22 +41,32 @@ class TrackDisplay extends React.Component {
       .then((json) => this.fillMetadata(json))
       .then(() => this.fillInfo())
       .then(() => this.createTracks())
-      .then(() => this.setState({ isGenerated: true }))
-      .catch(() => this.setParentState({ isSubmitted: false, playlistDNE: true }));
+      .catch((err) => console.log(err));
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { bpmKey, isGenerated } = this.state;
+    return nextState.isGenerated !== isGenerated || nextState.bpmKey !== bpmKey;
+  }
+
+  componentDidUpdate() {
+    this.allTracks = [];
+    this.createTracks();
   }
 
   fillMetadata(json) {
     const { items } = json;
     items.forEach((i) => {
       const { track } = i;
+      let { artists } = track;
       const {
-        album, artists, id, name, external_urls,
+        album, id, name, external_urls,
       } = track;
       const img = album.images[1].url;
-      const artist = artists[0].name;
+      artists = artists.map((a) => a.name).join(', ');
       const link = external_urls.spotify;
       this.trackInfo[id] = {
-        artist, name, img, link,
+        artists, name, img, link,
       };
     });
   }
@@ -82,19 +94,20 @@ class TrackDisplay extends React.Component {
           } = track;
           this.trackInfo[id].scale = key;
           this.trackInfo[id].mode = mode;
-          this.trackInfo[id].bpm = tempo;
+          this.trackInfo[id].bpm = Math.trunc(tempo + 0.5);
         });
       })
       .catch((err) => console.log(err));
   }
 
   createTracks() {
+    this.sortTracks();
     this.trackIds.forEach((id) => {
       this.allTracks.push(
         <Track
           key={id}
           title={this.trackInfo[id].name}
-          artist={this.trackInfo[id].artist}
+          artists={this.trackInfo[id].artists}
           link={this.trackInfo[id].link}
           scale={this.trackInfo[id].scale}
           mode={this.trackInfo[id].mode}
@@ -103,6 +116,35 @@ class TrackDisplay extends React.Component {
         />,
       );
     });
+    this.setState({ isGenerated: true });
+  }
+
+  sortTracks() {
+    const { bpmKey } = this.state;
+    if (!bpmKey) {
+      // Sort by BPM
+      this.trackIds.sort((a, b) => this.trackInfo[a].bpm - this.trackInfo[b].bpm);
+    } else {
+      // Sort by key (C, Cm, D, Dm,...)
+      this.trackIds.sort((a, b) => {
+        const keyComp = this.trackInfo[a].scale - this.trackInfo[b].scale;
+        const modeComp = this.trackInfo[a].mode - this.trackInfo[b].mode;
+        // If a's key != b's key, the "lower" key (closer to C) is smaller
+        if (keyComp !== 0) {
+          return keyComp;
+        }
+        // If a's key = b's key, the major key is smaller
+        return modeComp;
+      });
+    }
+  }
+
+  changeSort(sort) {
+    // sort is the boolean to which bpmKey should be set to
+    const { bpmKey } = this.state;
+    if (bpmKey !== sort) {
+      this.setState({ isGenerated: false, bpmKey: sort });
+    }
   }
 
   render() {
@@ -115,7 +157,19 @@ class TrackDisplay extends React.Component {
             <div className="loader" />
           </>
         )}
-        {isGenerated && this.allTracks}
+        {isGenerated && (
+          <>
+            <div id="toggle-display">
+              <button className="button-primary toggle-btn" type="button" onClick={() => this.changeSort(true)}>
+                Sort by key
+              </button>
+              <button className="button-primary toggle-btn" type="button" onClick={() => this.changeSort(false)}>
+                Sort by BPM
+              </button>
+            </div>
+            {this.allTracks}
+          </>
+        )}
       </>
     );
   }

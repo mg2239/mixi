@@ -18,3 +18,54 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+#toggle-display {
+  position: sticky;
+  top: 0;
+  height: 60px;
+  background-color: #ffffffcc;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.toggle-btn {
+  margin: 0;
+  padding: 0 20px;
+}
+
+.track {
+  display: flex;
+  height: 6rem;
+  background-color: rgb(245, 245, 245);
+  text-align: left;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.2rem;
+}
+
+.track-img {
+  height: 100%;
+  padding-right: 10px;
+}
+
+.track-title {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.track-artist {
+  font-size: 1.2rem;
+}
+
+.track-key {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.track-bpm {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}

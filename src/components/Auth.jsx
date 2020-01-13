@@ -15,14 +15,13 @@ class Auth extends React.Component {
       access,
       isSubmitted: false,
       invalidURI: false,
-      playlistDNE: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ invalidURI: false, playlistDNE: false, playlist: event.target.value });
+    this.setState({ invalidURI: false, playlist: event.target.value });
   }
 
   handleSubmit(event) {
@@ -38,21 +37,10 @@ class Auth extends React.Component {
   }
 
   warning() {
-    const { invalidURI, playlistDNE } = this.state;
+    const { invalidURI } = this.state;
     if (invalidURI) {
       return toast.error('Invalid URI!', {
-        toastId: 1,
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-      });
-    }
-    if (playlistDNE) {
-      return toast.error('Playlist does not exist!', {
-        toastId: 2,
+        toastId: '',
         position: 'top-right',
         autoClose: 2000,
         hideProgressBar: true,
@@ -78,6 +66,7 @@ class Auth extends React.Component {
               {' '}
               if you don&apos;t know how to find a playlist&apos;s URI.
             </p>
+            <p>spotify:playlist:5IKnmrC7kpOxgs4nJepT0E</p>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="playlist">
                 <input id="playlist" style={{ width: '60%', fontWeight: 400 }} type="text" onChange={this.handleChange} />
