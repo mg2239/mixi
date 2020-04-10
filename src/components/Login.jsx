@@ -5,7 +5,7 @@ import logo from '../img/mixi-logo.png';
 
 const isProd = window.location.hostname !== 'localhost';
 const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = isProd ? 'https://mixiforspotify.web.app/' : 'http://localhost:3000';
+const redirectUri = isProd ? 'https://mixi.netlify.com/' : 'http://localhost:3000';
 const spotifyAuth = `https://accounts.spotify.com/authorize?${
   querystring.stringify({
     client_id: clientId,
