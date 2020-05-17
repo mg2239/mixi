@@ -3,16 +3,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import TrackDisplay from './TrackDisplay';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function PlaylistInput({ access }) {
+type Props = {
+  accessToken: string
+}
+
+export default function PlaylistInput({ accessToken }: Props) {
   toast.configure();
 
-  const accessToken = access;
   const [playlist, setPlaylist] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [validURI, setValidURI] = useState(true);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValidURI(false)
+    setValidURI(false);
     setPlaylist(event.target.value);
   }
 
@@ -39,6 +42,7 @@ export default function PlaylistInput({ access }) {
         draggable: false,
       });
     }
+    return null;
   }
 
   return (
@@ -48,11 +52,11 @@ export default function PlaylistInput({ access }) {
           <h5>Enter a Spotify playlist URI below!</h5>
           <p>
             Check
-              {' '}
+            {' '}
             <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a>
             {' '}
             if you don&apos;t know how to find a playlist&apos;s URI.
-            </p>
+          </p>
           <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="playlist">
               <input id="playlist" style={{ width: '60%', fontWeight: 400 }} type="text" onChange={(e) => handleChange(e)} />
@@ -65,7 +69,7 @@ export default function PlaylistInput({ access }) {
       )}
       {submitted && (
         <>
-          <TrackDisplay access={accessToken} playlist={playlist} />
+          <TrackDisplay accessToken={accessToken} playlist={playlist} />
         </>
       )}
     </>

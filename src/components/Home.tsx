@@ -4,30 +4,29 @@ import PlaylistInput from './PlaylistInput';
 import logo from '../img/mixi-logo.png';
 
 const isProd = window.location.hostname !== 'localhost';
-const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = isProd ? 'https://mixiforspotify.web.app/' : 'http://localhost:3000';
+const clientID = process.env.REACT_APP_CLIENT_ID;
+const redirectURI = isProd ? window.location.href : 'http://localhost:3000';
 const spotifyAuth = `https://accounts.spotify.com/authorize?${
   querystring.stringify({
-    client_id: clientId,
-    redirect_uri: redirectUri,
+    client_id: clientID,
+    redirect_uri: redirectURI,
     response_type: 'token',
     show_dialog: true,
   })}`;
 
 type HashType = {
+  // eslint-disable-next-line camelcase
   access_token?: string,
 };
 
 const hash: HashType = window.location.hash
   .substring(1)
   .split('&')
-  .reduce((initial, item) => {
-    if (item) {
-      const parts = item.split('=');
-      // eslint-disable-next-line no-param-reassign
-      initial[parts[0]] = decodeURIComponent(parts[1]);
-    }
-    return initial;
+  .reduce((acc, item) => {
+    const newAcc = acc;
+    const parts = item.split('=');
+    newAcc[parts[0]] = decodeURIComponent(parts[1]);
+    return newAcc;
   }, {});
 
 window.location.hash = '';
@@ -57,15 +56,15 @@ export default function Home() {
           </a>
           <p>
             built by
-              {' '}
+            {' '}
             <a href="https://github.com/mg2239" target="_blank" rel="noopener noreferrer">matt</a>
             {' '}
             on github
-            </p>
+          </p>
         </>
       )}
       {token && (
-        <PlaylistInput access={token} />
+        <PlaylistInput accessToken={token} />
       )}
     </div>
   );
