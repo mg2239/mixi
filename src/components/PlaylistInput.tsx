@@ -1,44 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TrackDisplay from './TrackDisplay';
 import 'react-toastify/dist/ReactToastify.css';
 
-toast.configure();
+export default function PlaylistInput({ access }) {
+  toast.configure();
 
-class PlaylistInput extends React.Component {
-  constructor(props) {
-    super();
-    const { access } = props;
-    this.state = {
-      playlist: null,
-      access,
-      isSubmitted: false,
-      invalidURI: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const accessToken = access;
+  const [playlist, setPlaylist] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [validURI, setValidURI] = useState(true);
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setValidURI(false)
+    setPlaylist(event.target.value);
   }
 
-  handleChange(event) {
-    this.setState({ invalidURI: false, playlist: event.target.value });
-  }
-
-  handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     toast.dismiss();
-    const { playlist } = this.state;
     const reg = new RegExp('^spotify:playlist:.*');
     if (playlist && playlist.match(reg)) {
-      this.setState({ isSubmitted: true });
+      setSubmitted(true);
     } else {
-      this.setState({ invalidURI: true });
+      setValidURI(true);
     }
   }
 
-  warning() {
-    const { invalidURI } = this.state;
-    if (invalidURI) {
+  function warning() {
+    if (!validURI) {
       return toast.error('Invalid URI!', {
         toastId: '',
         position: 'top-right',
@@ -49,45 +39,35 @@ class PlaylistInput extends React.Component {
         draggable: false,
       });
     }
-    return null;
   }
 
-  render() {
-    const { access, playlist, isSubmitted } = this.state;
-    return (
-      <>
-        {!isSubmitted && (
-          <>
-            <h5>Enter a Spotify playlist URI below!</h5>
-            <p>
-              Check
+  return (
+    <>
+      {!submitted && (
+        <>
+          <h5>Enter a Spotify playlist URI below!</h5>
+          <p>
+            Check
               {' '}
-              <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a>
-              {' '}
-              if you don&apos;t know how to find a playlist&apos;s URI.
+            <a href="https://community.spotify.com/t5/Spotify-Answers/What-s-a-Spotify-URI/ta-p/919201" target="_blank" rel="noopener noreferrer">this link</a>
+            {' '}
+            if you don&apos;t know how to find a playlist&apos;s URI.
             </p>
-            <form onSubmit={this.handleSubmit}>
-              <label htmlFor="playlist">
-                <input id="playlist" style={{ width: '60%', fontWeight: 400 }} type="text" onChange={this.handleChange} />
-              </label>
-              <input type="submit" value="Submit" />
-              {this.warning()}
-              <ToastContainer />
-            </form>
-          </>
-        )}
-        {isSubmitted && (
-          <>
-            <TrackDisplay access={access} playlist={playlist} setState={(p) => this.setState(p)} />
-          </>
-        )}
-      </>
-    );
-  }
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <label htmlFor="playlist">
+              <input id="playlist" style={{ width: '60%', fontWeight: 400 }} type="text" onChange={(e) => handleChange(e)} />
+            </label>
+            <input type="submit" value="Submit" />
+            {warning()}
+            <ToastContainer />
+          </form>
+        </>
+      )}
+      {submitted && (
+        <>
+          <TrackDisplay access={accessToken} playlist={playlist} />
+        </>
+      )}
+    </>
+  );
 }
-
-PlaylistInput.propTypes = {
-  access: PropTypes.string.isRequired,
-};
-
-export default PlaylistInput;
