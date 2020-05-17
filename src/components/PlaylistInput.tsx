@@ -15,7 +15,7 @@ export default function PlaylistInput({ accessToken }: Props) {
   const [validURI, setValidURI] = useState(true);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValidURI(false);
+    setValidURI(true);
     setPlaylist(event.target.value);
   }
 
@@ -26,7 +26,7 @@ export default function PlaylistInput({ accessToken }: Props) {
     if (playlist && playlist.match(reg)) {
       setSubmitted(true);
     } else {
-      setValidURI(true);
+      setValidURI(false);
     }
   }
 

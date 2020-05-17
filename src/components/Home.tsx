@@ -22,7 +22,7 @@ type HashType = {
 const hash: HashType = window.location.hash
   .substring(1)
   .split('&')
-  .reduce((acc, item) => {
+  .reduce((acc: { [key: string]: string }, item) => {
     const newAcc = acc;
     const parts = item.split('=');
     newAcc[parts[0]] = decodeURIComponent(parts[1]);
@@ -32,7 +32,7 @@ const hash: HashType = window.location.hash
 window.location.hash = '';
 
 export default function Home() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     if (hash.access_token) {

@@ -10,12 +10,24 @@ type Props = {
   playlist: string
 }
 
+type TrackInfoType = {
+  [id: string]: {
+    name: string
+    artists: string
+    link: string
+    img: string
+    key: number
+    mode: number
+    bpm: number
+  }
+}
+
 export default function TrackDisplay({ accessToken, playlist }: Props) {
   const playlistID = playlist.substring(17);
   const [isGenerated, setGenerated] = useState(false);
   const [sort, setSort] = useState(Sort.bpm);
-  const trackInfo = {};
-  let trackIDs = [];
+  const trackInfo: TrackInfoType = {};
+  let trackIDs: string[] = [];
 
   async function generateTracks() {
     await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?${
@@ -34,25 +46,34 @@ export default function TrackDisplay({ accessToken, playlist }: Props) {
       .then((res) => res.json())
       .then(async (json) => {
         fillMetadata(json);
-        await fillInfo();
+        fillInfo();
+      })
+      .then(() => {
         sortTracks();
+        setGenerated(true);
       })
       .catch((err) => console.log(err));
   }
 
-  function fillMetadata(json) {
+  function fillMetadata(json: any) {
     const { items } = json;
-    items.forEach((i) => {
+    items.forEach((i: any) => {
       const { track } = i;
       let { artists } = track;
       const {
         album, id, name, external_urls,
       } = track;
       const img = album.images[1].url;
-      artists = artists.map((a) => a.name).join(', ');
+      artists = artists.map((a: any) => a.name).join(', ');
       const link = external_urls.spotify;
       trackInfo[id] = {
-        artists, name, img, link,
+        artists,
+        name,
+        img,
+        link,
+        key: 0,
+        mode: 0,
+        bpm: 0,
       };
     });
   }
@@ -73,7 +94,7 @@ export default function TrackDisplay({ accessToken, playlist }: Props) {
       .then((res) => res.json())
       .then((json) => {
         const { audio_features } = json;
-        audio_features.forEach((track) => {
+        audio_features.forEach((track: any) => {
           const {
             id, key, mode, tempo,
           } = track;
@@ -101,7 +122,7 @@ export default function TrackDisplay({ accessToken, playlist }: Props) {
     }
   }
 
-  function changeSort(newSort) {
+  function changeSort(newSort: Sort) {
     if (sort !== newSort) {
       setGenerated(false);
       setSort(newSort);
@@ -112,7 +133,6 @@ export default function TrackDisplay({ accessToken, playlist }: Props) {
   useEffect(() => {
     if (!isGenerated) {
       generateTracks();
-      setGenerated(true);
     }
   }, [isGenerated]);
 

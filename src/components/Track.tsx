@@ -10,7 +10,7 @@ type Props = {
   songKey: number
 }
 
-function convertKey(key, mode) {
+function convertKey(key: number, mode: number) {
   const numToKeyMaj = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
   const numToKeyMin = ['Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'Bbm', 'Bm'];
   if (mode) {
